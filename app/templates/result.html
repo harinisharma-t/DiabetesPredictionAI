@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Prediction Result</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
@@ -10,17 +9,22 @@
 
 <div class="container">
 
-<h1>Prediction Result</h1>
+    <h1>Diabetes Prediction Result</h1>
 
-<div class="result">
+    <div class="result">
+        <h2 style="color: {{ color }};">{{ prediction }}</h2>
 
-{{ prediction }}
+        <p>
+            <strong>Disclaimer:</strong><br>
+            This prediction is generated using a Machine Learning model and
+            is intended for educational purposes only. It is not a medical diagnosis.
+            Please consult a healthcare professional for an accurate assessment.
+        </p>
+    </div>
 
-</div>
-
-<br>
-
-<a href="/">Predict Again</a>
+    <a href="/">
+        <button>Predict Again</button>
+    </a>
 
 </div>
 

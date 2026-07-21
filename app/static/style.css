@@ -51,3 +51,22 @@ button:hover {
     font-size: 24px;
     font-weight: bold;
 }
+.result {
+    text-align: center;
+    margin: 20px 0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+}
+
+a {
+    text-decoration: none;
+}
+p {
+    text-align: center;
+    color: #555;
+    line-height: 1.6;
+    font-size: 15px;
+}

@@ -33,11 +33,17 @@ def predict():
     prediction = model.predict([features])
 
     if prediction[0] == 1:
-        result = "Diabetic"
+        result = "⚠️ High Risk of Diabetes"
+        color = "#dc3545"
     else:
-        result = "Not Diabetic"
+        result = "✅ Low Risk of Diabetes"
+        color = "#198754"
 
-    return render_template("result.html", prediction=result)
+    return render_template(
+        "result.html",
+        prediction=result,
+        color=color
+    )
 
 
 if __name__ == "__main__":
