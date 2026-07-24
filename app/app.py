@@ -31,8 +31,8 @@ def predict():
     ]
 
     prediction = model.predict([features])
+    
     probability = model.predict_proba([features])
-
     confidence = round(max(probability[0]) * 100, 2)
 
     if prediction[0] == 1:
@@ -43,11 +43,11 @@ def predict():
         color = "#198754"
 
     return render_template(
-    "result.html",
-    prediction=result,
-    color=color,
-    confidence=confidence
-)
+        "result.html",
+        prediction=result,
+        color=color,
+        confidence=confidence
+    )
 
 
 if __name__ == "__main__":
