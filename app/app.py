@@ -1,11 +1,20 @@
 from flask import Flask, render_template, request
 import pickle
 import os
+from db import create_database, save_prediction
 
 app = Flask(__name__)
 
+# Create the SQLite database (if it doesn't already exist)
+create_database()
+
 # Load the trained model
-model_path = os.path.join(os.path.dirname(__file__), "..", "models", "diabetes_model.pkl")
+model_path = os.path.join(
+    os.path.dirname(__file__),
+    "..",
+    "models",
+    "diabetes_model.pkl"
+)
 
 with open(model_path, "rb") as file:
     model = pickle.load(file)
@@ -31,7 +40,7 @@ def predict():
     ]
 
     prediction = model.predict([features])
-    
+
     probability = model.predict_proba([features])
     confidence = round(max(probability[0]) * 100, 2)
 
@@ -41,6 +50,13 @@ def predict():
     else:
         result = "✅ Low Risk of Diabetes"
         color = "#198754"
+
+    # Save prediction to SQLite database
+    save_prediction(
+        features,
+        result,
+        confidence
+    )
 
     return render_template(
         "result.html",
