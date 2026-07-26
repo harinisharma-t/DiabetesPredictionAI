@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import pickle
 import os
-from db import create_database, save_prediction
+from db import create_database, save_prediction, get_all_predictions
 
 app = Flask(__name__)
 
@@ -64,7 +64,15 @@ def predict():
         color=color,
         confidence=confidence
     )
+@app.route("/history")
+def history():
 
+    predictions = get_all_predictions()
+
+    return render_template(
+        "history.html",
+        predictions=predictions
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)

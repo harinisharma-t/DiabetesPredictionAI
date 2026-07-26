@@ -1,7 +1,10 @@
 import sqlite3
 import os
 
-DATABASE_NAME = os.path.join(os.path.dirname(__file__), "diabetes.db")
+DATABASE_NAME = os.path.join(
+    os.path.dirname(__file__),
+    "diabetes.db"
+)
 
 
 def get_connection():
@@ -68,3 +71,20 @@ def save_prediction(features, prediction, confidence):
 
     connection.commit()
     connection.close()
+
+
+def get_all_predictions():
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM predictions
+        ORDER BY created_at DESC
+    """)
+
+    data = cursor.fetchall()
+
+    connection.close()
+
+    return data
