@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>About Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <h1>About This Project</h1>
+
+    <p>
+        The Diabetes Prediction System is a Machine Learning web application
+        developed using the Pima Indians Diabetes Dataset.
+    </p>
+
+    <h2>Project Features</h2>
+
+    <ul style="text-align:left; max-width:600px; margin:auto;">
+        <li>Predict diabetes risk using Machine Learning.</li>
+        <li>Display prediction confidence.</li>
+        <li>Store prediction history in SQLite.</li>
+        <li>View all previous predictions.</li>
+        <li>Simple and user-friendly web interface.</li>
+    </ul>
+
+    <br>
+
+    <h2>Technology Stack</h2>
+
+    <ul style="text-align:left; max-width:600px; margin:auto;">
+        <li>Python</li>
+        <li>Flask</li>
+        <li>Scikit-learn</li>
+        <li>SQLite</li>
+        <li>HTML & CSS</li>
+    </ul>
+
+    <br><br>
+
+    <a href="/">
+        <button>Back to Home</button>
+    </a>
+
+</div>
+
+</body>
+</html>

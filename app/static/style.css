@@ -98,3 +98,34 @@ p {
 a {
     text-decoration: none;
 }
+
+/* =========================
+   Navigation Bar
+========================= */
+
+.navbar{
+    width:100%;
+    background:#2c3e50;
+    padding:15px 0;
+    margin-bottom:30px;
+}
+
+.navbar ul{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin:0;
+    padding:0;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.navbar a:hover{
+    color:#4CAF50;
+}

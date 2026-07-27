@@ -1,90 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-   <h1>Diabetes Prediction System</h1>
-
-<p class="subtitle">
-Enter the patient's medical information below.
-The prediction is generated using a trained Machine Learning model.
-</p>
-
+    <title>Diabetes Prediction System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
+<nav class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+</nav>
+
 <div class="container">
 
-<h1>Diabetes Prediction System</h1>
+    <h1>Diabetes Prediction Dashboard</h1>
 
-<form action="/predict" method="POST">
+    <p class="subtitle">
+        Welcome to the Diabetes Prediction System.
+        This application uses a Machine Learning model to estimate diabetes risk
+        based on patient health information.
+    </p>
 
-<label>Pregnancies</label>
-<input type="number"
-       name="Pregnancies"
-       placeholder="e.g. 2"
-       min="0"
-       required>
+    <form action="/predict" method="POST">
 
-<label>Glucose</label>
-<input type="number"
-       name="Glucose"
-       placeholder="e.g. 120"
-       min="0"
-       required>
+        <label>Pregnancies</label>
+        <input type="number" name="Pregnancies" min="0" required>
 
-<label>Blood Pressure</label>
-<input type="number"
-       name="BloodPressure"
-       placeholder="e.g. 70"
-       min="0"
-       required>
+        <label>Glucose</label>
+        <input type="number" name="Glucose" min="0" required>
 
-<label>Skin Thickness</label>
-<input type="number"
-       name="SkinThickness"
-       placeholder="e.g. 20"
-       min="0"
-       required>
+        <label>Blood Pressure</label>
+        <input type="number" name="BloodPressure" min="0" required>
 
-<label>Insulin</label>
-<input type="number"
-       name="Insulin"
-       placeholder="e.g. 79"
-       min="0"
-       required>
+        <label>Skin Thickness</label>
+        <input type="number" name="SkinThickness" min="0" required>
 
-<label>BMI</label>
-<input type="number"
-       step="0.1"
-       name="BMI"
-       placeholder="e.g. 25.5"
-       min="0"
-       required>
+        <label>Insulin</label>
+        <input type="number" name="Insulin" min="0" required>
 
-<label>Diabetes Pedigree Function</label>
-<input type="number"
-       step="0.001"
-       name="DiabetesPedigreeFunction"
-       placeholder="e.g. 0.351"
-       min="0"
-       required>
+        <label>BMI</label>
+        <input type="number" step="0.1" name="BMI" min="0" required>
 
-<label>Age</label>
-<input type="number"
-       name="Age"
-       placeholder="e.g. 35"
-       min="1"
-       required>
-<button type="submit">Predict</button>
+        <label>Diabetes Pedigree Function</label>
+        <input type="number" step="0.001" name="DiabetesPedigreeFunction" min="0" required>
 
-<br><br>
+        <label>Age</label>
+        <input type="number" name="Age" min="1" required>
 
-<a href="/history">
-    <button type="button">View Prediction History</button>
-</a>
+        <br>
 
-</form>
+        <button type="submit">Predict Diabetes</button>
+
+    </form>
+
+    <br>
+
+    <a href="/history">
+        <button type="button">Prediction History</button>
+    </a>
+
+    <br><br>
+
+    <a href="/about">
+        <button type="button">About Project</button>
+    </a>
 
 </div>
 
