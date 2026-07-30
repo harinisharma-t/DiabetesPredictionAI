@@ -1,7 +1,12 @@
 from flask import Flask, render_template, request
 import pickle
 import os
-from db import create_database, save_prediction, get_all_predictions
+from db import (
+    create_database,
+    save_prediction,
+    get_all_predictions,
+    get_statistics
+)
 
 app = Flask(__name__)
 
@@ -22,7 +27,15 @@ with open(model_path, "rb") as file:
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+
+    total, high_risk, low_risk = get_statistics()
+
+    return render_template(
+        "index.html",
+        total=total,
+        high_risk=high_risk,
+        low_risk=low_risk
+    )
 
 
 @app.route("/predict", methods=["POST"])

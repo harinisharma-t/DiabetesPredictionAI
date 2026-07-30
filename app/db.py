@@ -88,3 +88,27 @@ def get_all_predictions():
     connection.close()
 
     return data
+
+
+def get_statistics():
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM predictions")
+    total = cursor.fetchone()[0]
+
+    cursor.execute(
+        "SELECT COUNT(*) FROM predictions WHERE prediction = ?",
+        ("⚠️ High Risk of Diabetes",)
+    )
+    high_risk = cursor.fetchone()[0]
+
+    cursor.execute(
+        "SELECT COUNT(*) FROM predictions WHERE prediction = ?",
+        ("✅ Low Risk of Diabetes",)
+    )
+    low_risk = cursor.fetchone()[0]
+
+    connection.close()
+
+    return total, high_risk, low_risk
