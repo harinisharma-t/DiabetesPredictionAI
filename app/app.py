@@ -5,7 +5,8 @@ from db import (
     create_database,
     save_prediction,
     get_all_predictions,
-    get_statistics
+    get_statistics,
+    search_predictions
 )
 
 app = Flask(__name__)
@@ -28,7 +29,7 @@ with open(model_path, "rb") as file:
 @app.route("/")
 def home():
 
-    total, high_risk, low_risk = get_statistics()
+    
 
     return render_template(
         "index.html",

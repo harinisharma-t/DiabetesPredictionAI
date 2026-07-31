@@ -20,7 +20,26 @@
 
     <h1>Prediction History</h1>
 
-    <table border="1" cellpadding="10" cellspacing="0" style="margin:auto; border-collapse:collapse;">
+    <!-- Search Box -->
+    <form method="GET" action="/history" style="margin-bottom:20px;">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search by Prediction, Glucose or Age"
+            value="{{ search }}"
+            style="width:300px; padding:10px;">
+
+        <button type="submit">Search</button>
+
+        <a href="/history">
+            <button type="button">Clear</button>
+        </a>
+
+    </form>
+
+    <table border="1" cellpadding="10" cellspacing="0"
+           style="margin:auto; border-collapse:collapse;">
 
         <tr>
             <th>ID</th>

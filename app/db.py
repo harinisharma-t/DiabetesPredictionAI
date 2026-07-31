@@ -111,4 +111,26 @@ def get_statistics():
 
     connection.close()
 
-    return total, high_risk, low_risk
+    return (total, high_risk, low_risk)
+
+
+def search_predictions(search_text):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    search = f"%{search_text}%"
+
+    cursor.execute("""
+        SELECT *
+        FROM predictions
+        WHERE prediction LIKE ?
+           OR CAST(glucose AS TEXT) LIKE ?
+           OR CAST(age AS TEXT) LIKE ?
+        ORDER BY created_at DESC
+    """, (search, search, search))
+
+    data = cursor.fetchall()
+
+    connection.close()
+
+    return data
