@@ -29,7 +29,7 @@ with open(model_path, "rb") as file:
 @app.route("/")
 def home():
 
-    
+    total, high_risk, low_risk = get_statistics()
 
     return render_template(
         "index.html",
@@ -65,7 +65,6 @@ def predict():
         result = "✅ Low Risk of Diabetes"
         color = "#198754"
 
-    # Save prediction to SQLite database
     save_prediction(
         features,
         result,
@@ -78,19 +77,29 @@ def predict():
         color=color,
         confidence=confidence
     )
+
+
 @app.route("/history")
 def history():
 
-    predictions = get_all_predictions()
+    search = request.args.get("search", "").strip()
+
+    if search:
+        predictions = search_predictions(search)
+    else:
+        predictions = get_all_predictions()
 
     return render_template(
         "history.html",
-        predictions=predictions
+        predictions=predictions,
+        search=search
     )
+
 
 @app.route("/about")
 def about():
     return render_template("about.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
