@@ -20,15 +20,13 @@
 
     <h1>Prediction History</h1>
 
-    <!-- Search Box -->
-    <form method="GET" action="/history" style="margin-bottom:20px;">
+    <form method="GET" action="/history" class="search-form">
 
         <input
             type="text"
             name="search"
             placeholder="Search by Prediction, Glucose or Age"
-            value="{{ search }}"
-            style="width:300px; padding:10px;">
+            value="{{ search }}">
 
         <button type="submit">Search</button>
 
@@ -38,32 +36,58 @@
 
     </form>
 
-    <table border="1" cellpadding="10" cellspacing="0"
-           style="margin:auto; border-collapse:collapse;">
+    <table class="history-table">
 
-        <tr>
-            <th>ID</th>
-            <th>Glucose</th>
-            <th>BMI</th>
-            <th>Prediction</th>
-            <th>Confidence</th>
-            <th>Date & Time</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Glucose</th>
+                <th>BMI</th>
+                <th>Prediction</th>
+                <th>Confidence</th>
+                <th>Date & Time</th>
+            </tr>
+        </thead>
+
+        <tbody>
 
         {% for row in predictions %}
+
         <tr>
+
             <td>{{ row[0] }}</td>
+
             <td>{{ row[2] }}</td>
+
             <td>{{ row[6] }}</td>
-            <td>{{ row[9] }}</td>
+
+            <td>
+
+                {% if "High" in row[9] %}
+                    <span class="badge high-risk">
+                        {{ row[9] }}
+                    </span>
+                {% else %}
+                    <span class="badge low-risk">
+                        {{ row[9] }}
+                    </span>
+                {% endif %}
+
+            </td>
+
             <td>{{ row[10] }}%</td>
+
             <td>{{ row[11] }}</td>
+
         </tr>
+
         {% endfor %}
+
+        </tbody>
 
     </table>
 
-    <br><br>
+    <br>
 
     <a href="/">
         <button>Back to Home</button>
@@ -72,4 +96,5 @@
 </div>
 
 </body>
+
 </html>
