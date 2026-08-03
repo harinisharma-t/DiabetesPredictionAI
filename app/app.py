@@ -1,12 +1,15 @@
 from flask import Flask, render_template, request
 import pickle
 import os
+import csv
+from flask import Response
 from db import (
     create_database,
     save_prediction,
     get_all_predictions,
     get_statistics,
-    search_predictions
+    search_predictions,
+    export_predictions
 )
 
 app = Flask(__name__)
@@ -100,6 +103,28 @@ def history():
 def about():
     return render_template("about.html")
 
+@app.route("/export")
+def export():
+
+    predictions = export_predictions()
+
+    def generate():
+
+        writer = csv.writer(open("temp.csv", "w", newline=""))
+
+        yield "ID,Glucose,BMI,Prediction,Confidence,Created At\n"
+
+        for row in predictions:
+            yield f"{row[0]},{row[2]},{row[6]},{row[9]},{row[10]},{row[11]}\n"
+
+    return Response(
+        generate(),
+        mimetype="text/csv",
+        headers={
+            "Content-Disposition":
+            "attachment; filename=prediction_history.csv"
+        }
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)

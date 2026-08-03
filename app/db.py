@@ -134,3 +134,19 @@ def search_predictions(search_text):
     connection.close()
 
     return data
+
+def export_predictions():
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM predictions
+        ORDER BY created_at DESC
+    """)
+
+    data = cursor.fetchall()
+
+    connection.close()
+
+    return data
