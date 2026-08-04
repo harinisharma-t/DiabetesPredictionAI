@@ -91,5 +91,38 @@
 
 </div>
 
+<hr>
+
+<h2 style="text-align:center;">Prediction Analytics</h2>
+
+<div style="width:70%; margin:auto;">
+    <canvas id="predictionChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('predictionChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['High Risk', 'Low Risk'],
+        datasets: [{
+            label: 'Number of Predictions',
+            data: [{{ high_risk }}, {{ low_risk }}]
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
 </body>
 </html>
