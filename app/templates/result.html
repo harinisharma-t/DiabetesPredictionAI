@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Prediction Result</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -12,25 +13,60 @@
     <h1>Diabetes Prediction Result</h1>
 
     <div class="result">
-        <h2 style="color: {{ color }};">{{ prediction }}</h2>
+
+        <h2 style="color: {{ color }};">
+            {{ prediction }}
+        </h2>
 
         <div class="confidence-box">
-    <strong>Confidence:</strong> {{ confidence }}%
+            <strong>Confidence:</strong> {{ confidence }}%
         </div>
 
+        <hr>
+
+        <h3>Interpretation</h3>
+
+        {% if "High" in prediction %}
+
         <p>
-            <strong>Disclaimer:</strong><br>
-            This prediction is generated using a Machine Learning model and
-            is intended for educational purposes only. It is not a medical diagnosis.
-            Please consult a healthcare professional for an accurate assessment.
+            The model predicts that this patient has a higher likelihood of
+            diabetes. This result is only an AI prediction and should always
+            be confirmed by a qualified healthcare professional.
         </p>
+
+        {% else %}
+
+        <p>
+            The model predicts a lower likelihood of diabetes.
+            Maintaining a healthy lifestyle and regular health check-ups
+            is still recommended.
+        </p>
+
+        {% endif %}
+
+        <hr>
+
+        <p>
+            <strong>Disclaimer</strong><br>
+            This application is intended for educational purposes only.
+            It must not be used as a substitute for professional medical advice,
+            diagnosis, or treatment.
+        </p>
+
     </div>
+
+    <br>
 
     <a href="/">
         <button>Predict Again</button>
     </a>
 
+    <a href="/history">
+        <button>View History</button>
+    </a>
+
 </div>
 
 </body>
+
 </html>
