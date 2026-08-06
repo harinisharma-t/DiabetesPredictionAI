@@ -1,8 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 import pickle
 import os
 import csv
-from flask import Response
+from io import BytesIO
+from datetime import datetime
+
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
+
 from db import (
     create_database,
     save_prediction,
@@ -13,6 +19,9 @@ from db import (
 )
 
 app = Flask(__name__)
+
+# Store the latest prediction for PDF generation
+latest_prediction = {}
 
 # Create the SQLite database (if it doesn't already exist)
 create_database()
@@ -45,6 +54,8 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
 
+    global latest_prediction
+
     features = [
         float(request.form["Pregnancies"]),
         float(request.form["Glucose"]),
@@ -73,6 +84,13 @@ def predict():
         result,
         confidence
     )
+
+    # Save latest prediction for PDF
+    latest_prediction = {
+        "prediction": result,
+        "confidence": confidence,
+        "date": datetime.now().strftime("%d-%m-%Y %H:%M")
+    }
 
     return render_template(
         "result.html",
@@ -103,14 +121,13 @@ def history():
 def about():
     return render_template("about.html")
 
+
 @app.route("/export")
 def export():
 
     predictions = export_predictions()
 
     def generate():
-
-        writer = csv.writer(open("temp.csv", "w", newline=""))
 
         yield "ID,Glucose,BMI,Prediction,Confidence,Created At\n"
 
@@ -125,6 +142,70 @@ def export():
             "attachment; filename=prediction_history.csv"
         }
     )
+
+
+@app.route("/download-pdf")
+def download_pdf():
+
+    buffer = BytesIO()
+
+    doc = SimpleDocTemplate(buffer, pagesize=letter)
+
+    styles = getSampleStyleSheet()
+
+    story = []
+
+    story.append(
+        Paragraph(
+            "Diabetes Prediction Report",
+            styles["Title"]
+        )
+    )
+
+    story.append(
+        Paragraph(
+            f"<b>Prediction:</b> {latest_prediction.get('prediction', 'N/A')}",
+            styles["BodyText"]
+        )
+    )
+
+    story.append(
+        Paragraph(
+            f"<b>Confidence:</b> {latest_prediction.get('confidence', 'N/A')}%",
+            styles["BodyText"]
+        )
+    )
+
+    story.append(
+        Paragraph(
+            f"<b>Date:</b> {latest_prediction.get('date', 'N/A')}",
+            styles["BodyText"]
+        )
+    )
+
+    story.append(
+        Paragraph(
+            "<br/><b>Disclaimer:</b> This report is generated using a "
+            "Machine Learning model and is intended for educational "
+            "purposes only. It is not a medical diagnosis.",
+            styles["BodyText"]
+        )
+    )
+
+    doc.build(story)
+
+    pdf = buffer.getvalue()
+    buffer.close()
+
+    return Response(
+        pdf,
+        mimetype="application/pdf",
+        headers={
+            "Content-Disposition":
+            "attachment; filename=Diabetes_Report.pdf"
+        }
+    )
+
 
 if __name__ == "__main__":
     app.run(debug=True)
