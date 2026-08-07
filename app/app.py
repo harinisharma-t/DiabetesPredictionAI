@@ -56,15 +56,49 @@ def predict():
 
     global latest_prediction
 
+    pregnancies = float(request.form["Pregnancies"])
+    glucose = float(request.form["Glucose"])
+    blood_pressure = float(request.form["BloodPressure"])
+    skin_thickness = float(request.form["SkinThickness"])
+    insulin = float(request.form["Insulin"])
+    bmi = float(request.form["BMI"])
+    diabetes_pedigree = float(request.form["DiabetesPedigreeFunction"])
+    age = float(request.form["Age"])
+
+    # Input Validation
+    if pregnancies < 0:
+        return "Pregnancies cannot be negative."
+
+    if glucose < 0 or glucose > 300:
+        return "Glucose must be between 0 and 300."
+
+    if blood_pressure < 0 or blood_pressure > 200:
+        return "Blood Pressure must be between 0 and 200."
+
+    if skin_thickness < 0 or skin_thickness > 100:
+        return "Skin Thickness must be between 0 and 100."
+
+    if insulin < 0 or insulin > 900:
+        return "Insulin must be between 0 and 900."
+
+    if bmi < 10 or bmi > 70:
+        return "BMI must be between 10 and 70."
+
+    if diabetes_pedigree < 0 or diabetes_pedigree > 3:
+        return "Diabetes Pedigree Function must be between 0 and 3."
+
+    if age < 1 or age > 120:
+        return "Age must be between 1 and 120."
+
     features = [
-        float(request.form["Pregnancies"]),
-        float(request.form["Glucose"]),
-        float(request.form["BloodPressure"]),
-        float(request.form["SkinThickness"]),
-        float(request.form["Insulin"]),
-        float(request.form["BMI"]),
-        float(request.form["DiabetesPedigreeFunction"]),
-        float(request.form["Age"])
+        pregnancies,
+        glucose,
+        blood_pressure,
+        skin_thickness,
+        insulin,
+        bmi,
+        diabetes_pedigree,
+        age
     ]
 
     prediction = model.predict([features])
