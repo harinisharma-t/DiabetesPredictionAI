@@ -150,3 +150,4 @@ def export_predictions():
     connection.close()
 
     return data
+

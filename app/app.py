@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, redirect, url_for, flash
 import pickle
 import os
 import csv
@@ -19,6 +19,7 @@ from db import (
 )
 
 app = Flask(__name__)
+app.secret_key = "diabetes-prediction-secret-key"
 
 # Store the latest prediction for PDF generation
 latest_prediction = {}
@@ -67,28 +68,36 @@ def predict():
 
     # Input Validation
     if pregnancies < 0:
-        return "Pregnancies cannot be negative."
+        flash("Pregnancies cannot be negative.", "error")
+        return redirect(url_for("home"))
 
     if glucose < 0 or glucose > 300:
-        return "Glucose must be between 0 and 300."
+        flash("Glucose must be between 0 and 300.", "error")
+        return redirect(url_for("home"))
 
     if blood_pressure < 0 or blood_pressure > 200:
-        return "Blood Pressure must be between 0 and 200."
+        flash("Blood Pressure must be between 0 and 200.", "error")
+        return redirect(url_for("home"))
 
     if skin_thickness < 0 or skin_thickness > 100:
-        return "Skin Thickness must be between 0 and 100."
+        flash("Skin Thickness must be between 0 and 100.", "error")
+        return redirect(url_for("home"))
 
     if insulin < 0 or insulin > 900:
-        return "Insulin must be between 0 and 900."
+        flash("Insulin must be between 0 and 900.", "error")
+        return redirect(url_for("home"))
 
     if bmi < 10 or bmi > 70:
-        return "BMI must be between 10 and 70."
+        flash("BMI must be between 10 and 70.", "error")
+        return redirect(url_for("home"))
 
     if diabetes_pedigree < 0 or diabetes_pedigree > 3:
-        return "Diabetes Pedigree Function must be between 0 and 3."
+        flash("Diabetes Pedigree Function must be between 0 and 3.", "error")
+        return redirect(url_for("home"))
 
     if age < 1 or age > 120:
-        return "Age must be between 1 and 120."
+        flash("Age must be between 1 and 120.", "error")
+        return redirect(url_for("home"))
 
     features = [
         pregnancies,
