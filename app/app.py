@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, Response, jsonify
 import pickle
 import os
 import csv
+import logging
 from io import BytesIO
 from datetime import datetime
 
@@ -21,6 +22,12 @@ from db import (
 
 app = Flask(__name__)
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+logger = logging.getLogger(__name__)
 # Store the latest prediction for PDF generation
 latest_prediction = {}
 
@@ -421,5 +428,5 @@ def download_pdf():
 # ---------------------------------------------------------
 
 if __name__ == "__main__":
-
+    logger.info("Diabetes Prediction AI application started.")
     app.run(debug=True)
