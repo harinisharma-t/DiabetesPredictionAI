@@ -103,3 +103,9 @@ For a diabetes screening problem, recall is particularly important because missi
         │ Prediction Result│
         │ + Confidence     │
         └──────────────────┘
+
+## Current Status
+
+The application is currently deployed and available as a live Flask web application.
+
+The deployment has been tested for prediction generation, prediction history, search, and CSV export.
