@@ -61,7 +61,7 @@
         based on patient health information.
     </p>
 
-    <form action="/predict" method="POST">
+    <form action="/predict" method="POST" onsubmit="return validateForm()">
 
         <label>Pregnancies</label>
         <input type="number" name="Pregnancies" min="0" required>
@@ -152,6 +152,30 @@ new Chart(ctx, {
                 button.innerText = "Predicting...";
             }
         });
+    }
+</script>
+<script>
+    function validateForm() {
+        const glucose = parseFloat(document.querySelector("[name='Glucose']").value);
+        const bmi = parseFloat(document.querySelector("[name='BMI']").value);
+        const age = parseFloat(document.querySelector("[name='Age']").value);
+
+        if (glucose < 0 || glucose > 300) {
+            alert("Please enter a valid glucose value between 0 and 300.");
+            return false;
+        }
+
+        if (bmi < 0 || bmi > 100) {
+            alert("Please enter a valid BMI value between 0 and 100.");
+            return false;
+        }
+
+        if (age < 1 || age > 120) {
+            alert("Please enter a valid age between 1 and 120.");
+            return false;
+        }
+
+        return true;
     }
 </script>
 </body>
