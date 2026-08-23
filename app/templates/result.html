@@ -19,8 +19,17 @@
         </h2>
 
         <div class="confidence-box">
-            <strong>Confidence:</strong> {{ confidence }}%
+
+    <strong>Confidence:</strong> {{ confidence }}%
+
+    <div class="confidence-bar">
+        <div
+            class="confidence-fill"
+            style="width: {{ confidence }}%; background-color: {{ color }};">
         </div>
+    </div>
+
+</div>
 
         <hr>
 
