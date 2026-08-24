@@ -240,3 +240,9 @@ a {
     border-radius: 10px;
     transition: width 0.5s ease;
 }
+.page-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
