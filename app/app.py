@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Response, jsonify
+from flask import Flask, render_template, request, redirect
 import pickle
 import os
 import csv
@@ -16,9 +16,9 @@ from db import (
     get_all_predictions,
     get_statistics,
     search_predictions,
-    export_predictions
+    export_predictions,
+    clear_predictions
 )
-
 
 app = Flask(__name__)
 
@@ -280,6 +280,13 @@ def history():
         predictions=predictions,
         search=search
     )
+
+@app.route("/clear-history", methods=["POST"])
+def clear_history():
+
+    clear_predictions()
+
+    return redirect("/history")
 
 
 # ---------------------------------------------------------

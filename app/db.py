@@ -150,4 +150,11 @@ def export_predictions():
     connection.close()
 
     return data
+def clear_predictions():
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
 
+    cursor.execute("DELETE FROM predictions")
+
+    conn.commit()
+    conn.close()
