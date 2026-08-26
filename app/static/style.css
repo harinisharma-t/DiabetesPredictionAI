@@ -246,3 +246,17 @@ a {
     margin-bottom: 25px;
     font-size: 16px;
 }
+.about-section {
+    max-width: 800px;
+    margin: 30px auto;
+    line-height: 1.7;
+}
+
+.about-section h2,
+.about-section h3 {
+    margin-top: 25px;
+}
+
+.about-section li {
+    margin-bottom: 8px;
+}
