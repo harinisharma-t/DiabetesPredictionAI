@@ -1,91 +1,50 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>About Project</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% block title %}About - Diabetes Prediction AI{% endblock %}
 
-<body>
-
-    <nav class="navbar">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/history">History</a></li>
-        <li><a href="/about">About</a></li>
-    </ul>
-</nav>
+{% block content %}
 
 <div class="container">
 
-    <h1>About This Project</h1>
+    <h2>About Diabetes Prediction AI</h2>
 
     <p>
-        The Diabetes Prediction System is a Machine Learning web application
-        developed using the Pima Indians Diabetes Dataset.
+        Diabetes Prediction AI is a Machine Learning based application
+        that estimates the risk of diabetes using health-related input data.
     </p>
 
-    <h2>Project Features</h2>
+    <div class="about-section">
 
-    <ul style="text-align:left; max-width:600px; margin:auto;">
-        <li>Predict diabetes risk using Machine Learning.</li>
-        <li>Display prediction confidence.</li>
-        <li>Store prediction history in SQLite.</li>
-        <li>View all previous predictions.</li>
-        <li>Simple and user-friendly web interface.</li>
-    </ul>
+        <h2>How It Works</h2>
 
-    <br>
+        <p>
+            Diabetes Prediction AI uses a trained Machine Learning model
+            to analyze health-related input values and estimate the risk
+            of diabetes.
+        </p>
 
-    <h2>Technology Stack</h2>
+        <h3>Prediction Process</h3>
 
-    <ul style="text-align:left; max-width:600px; margin:auto;">
-        <li>Python</li>
-        <li>Flask</li>
-        <li>Scikit-learn</li>
-        <li>SQLite</li>
-        <li>HTML & CSS</li>
-    </ul>
+        <ol>
+            <li>Enter the patient's health information.</li>
+            <li>The Machine Learning model processes the input.</li>
+            <li>The application generates a diabetes risk prediction.</li>
+            <li>The prediction confidence is displayed to the user.</li>
+            <li>The prediction can be stored and reviewed in history.</li>
+        </ol>
 
-    <br><br>
+        <h3>Technology Used</h3>
 
-    <a href="/">
-        <button>Back to Home</button>
-    </a>
+        <ul>
+            <li>Python</li>
+            <li>Flask</li>
+            <li>Scikit-learn</li>
+            <li>SQLite</li>
+            <li>HTML and CSS</li>
+        </ul>
+
+    </div>
 
 </div>
 
-</body>
-</html>
-
-<div class="about-section">
-
-    <h2>How It Works</h2>
-
-    <p>
-        Diabetes Prediction AI uses a trained Machine Learning model
-        to analyze health-related input values and estimate the risk
-        of diabetes.
-    </p>
-
-    <h3>Prediction Process</h3>
-
-    <ol>
-        <li>Enter the patient's health information.</li>
-        <li>The Machine Learning model processes the input.</li>
-        <li>The application generates a diabetes risk prediction.</li>
-        <li>The prediction confidence is displayed to the user.</li>
-        <li>The prediction can be stored and reviewed in history.</li>
-    </ol>
-
-    <h3>Technology Used</h3>
-
-    <ul>
-        <li>Python</li>
-        <li>Flask</li>
-        <li>Scikit-learn</li>
-        <li>SQLite</li>
-        <li>HTML and CSS</li>
-    </ul>
-
-</div>
+{% endblock %}
