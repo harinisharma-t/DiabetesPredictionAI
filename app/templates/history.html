@@ -1,55 +1,34 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>Prediction History</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% block title %}Prediction History - Diabetes Prediction AI{% endblock %}
 
-<body>
-
-<nav class="navbar">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/history">History</a></li>
-        <li><a href="/about">About</a></li>
-    </ul>
-</nav>
+{% block content %}
 
 <div class="container">
 
-    <h1>Prediction History</h1>
+    <h2>Prediction History</h2>
+
     <p class="page-description">
         View and review previously recorded diabetes risk predictions.
     </p>
 
-    <form method="GET" action="/history" class="search-form">
+    <form action="/history" method="GET">
 
         <input
             type="text"
             name="search"
-            placeholder="Search by Prediction, Glucose or Age"
-            value="{{ search }}">
+            placeholder="Search predictions..."
+            value="{{ search }}"
+        >
 
         <button type="submit">Search</button>
 
-        <a href="/history">
-            <button type="button">Clear</button>
-        </a>
-
     </form>
 
-    <br>
 
-<a href="/export">
-    <button type="button">
-        Export CSV
-    </button>
-</a>
+    {% if predictions %}
 
-<br><br>
-
-    <table class="history-table">
+    <table>
 
         <thead>
             <tr>
@@ -58,66 +37,45 @@
                 <th>BMI</th>
                 <th>Prediction</th>
                 <th>Confidence</th>
-                <th>Date & Time</th>
+                <th>Created At</th>
             </tr>
         </thead>
 
         <tbody>
 
-        {% for row in predictions %}
+            {% for row in predictions %}
 
-        <tr>
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[9] }}</td>
+                <td>{{ row[10] }}%</td>
+                <td>{{ row[11] }}</td>
+            </tr>
 
-            <td>{{ row[0] }}</td>
-
-            <td>{{ row[2] }}</td>
-
-            <td>{{ row[6] }}</td>
-
-            <td>
-
-                {% if "High" in row[9] %}
-                    <span class="badge high-risk">
-                        {{ row[9] }}
-                    </span>
-                {% else %}
-                    <span class="badge low-risk">
-                        {{ row[9] }}
-                    </span>
-                {% endif %}
-
-            </td>
-
-            <td>{{ row[10] }}%</td>
-
-            <td>{{ row[11] }}</td>
-
-        </tr>
-
-        {% endfor %}
+            {% endfor %}
 
         </tbody>
 
     </table>
 
-    <br>
+    {% else %}
+
+    <p>No prediction records found.</p>
+
+    {% endif %}
+
 
     <form action="/clear-history" method="POST"
-      onsubmit="return confirm('Are you sure you want to delete all prediction history?');">
+          onsubmit="return confirm('Are you sure you want to delete all prediction history?');">
 
-    <button type="submit">
-        Clear History
-    </button>
+        <button type="submit">
+            Clear History
+        </button>
 
-</form>
-
-<br>
-    <a href="/">
-        <button>Back to Home</button>
-    </a>
+    </form>
 
 </div>
 
-</body>
-
-</html>
+{% endblock %}

@@ -1,24 +1,12 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>Diabetes Prediction System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% block title %}Dashboard - Diabetes Prediction AI{% endblock %}
 
-<body>
-
-<nav class="navbar">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/history">History</a></li>
-        <li><a href="/about">About</a></li>
-    </ul>
-</nav>
+{% block content %}
 
 <div class="container">
 
-    <h1>Diabetes Prediction Dashboard</h1>
+    <h2>Diabetes Prediction Dashboard</h2>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
 
@@ -34,32 +22,35 @@
 
     {% endif %}
 
-{% endwith %}
+    {% endwith %}
 
-<div class="stats-container">
 
-    <div class="stat-card">
-        <h2>{{ total }}</h2>
-        <p>Total Predictions</p>
+    <div class="stats-container">
+
+        <div class="stat-card">
+            <h2>{{ total }}</h2>
+            <p>Total Predictions</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ high_risk }}</h2>
+            <p>High Risk Cases</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>{{ low_risk }}</h2>
+            <p>Low Risk Cases</p>
+        </div>
+
     </div>
 
-    <div class="stat-card">
-        <h2>{{ high_risk }}</h2>
-        <p>High Risk Cases</p>
-    </div>
-
-    <div class="stat-card">
-        <h2>{{ low_risk }}</h2>
-        <p>Low Risk Cases</p>
-    </div>
-
-</div>
 
     <p class="subtitle">
         Welcome to the Diabetes Prediction System.
         This application uses a Machine Learning model to estimate diabetes risk
         based on patient health information.
     </p>
+
 
     <form action="/predict" method="POST" onsubmit="return validateForm()">
 
@@ -82,7 +73,8 @@
         <input type="number" step="0.1" name="BMI" min="0" required>
 
         <label>Diabetes Pedigree Function</label>
-        <input type="number" step="0.001" name="DiabetesPedigreeFunction" min="0" required>
+        <input type="number" step="0.001"
+               name="DiabetesPedigreeFunction" min="0" required>
 
         <label>Age</label>
         <input type="number" name="Age" min="1" required>
@@ -92,6 +84,7 @@
         <button type="submit">Predict Diabetes</button>
 
     </form>
+
 
     <br>
 
@@ -107,6 +100,7 @@
 
 </div>
 
+
 <hr>
 
 <h2 style="text-align:center;">Prediction Analytics</h2>
@@ -114,6 +108,7 @@
 <div style="width:70%; margin:auto;">
     <canvas id="predictionChart"></canvas>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -140,43 +135,64 @@ new Chart(ctx, {
 });
 </script>
 
+
 <script>
     const form = document.querySelector("form");
 
     if (form) {
         form.addEventListener("submit", function () {
+
             const button = form.querySelector("button[type='submit']");
 
             if (button) {
                 button.disabled = true;
                 button.innerText = "Predicting...";
             }
+
         });
     }
 </script>
+
+
 <script>
     function validateForm() {
-        const glucose = parseFloat(document.querySelector("[name='Glucose']").value);
-        const bmi = parseFloat(document.querySelector("[name='BMI']").value);
-        const age = parseFloat(document.querySelector("[name='Age']").value);
+
+        const glucose =
+            parseFloat(document.querySelector("[name='Glucose']").value);
+
+        const bmi =
+            parseFloat(document.querySelector("[name='BMI']").value);
+
+        const age =
+            parseFloat(document.querySelector("[name='Age']").value);
+
 
         if (glucose < 0 || glucose > 300) {
+
             alert("Please enter a valid glucose value between 0 and 300.");
+
             return false;
         }
+
 
         if (bmi < 0 || bmi > 100) {
+
             alert("Please enter a valid BMI value between 0 and 100.");
+
             return false;
         }
 
+
         if (age < 1 || age > 120) {
+
             alert("Please enter a valid age between 1 and 120.");
+
             return false;
         }
+
 
         return true;
     }
 </script>
-</body>
-</html>
+
+{% endblock %}
