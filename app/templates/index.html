@@ -157,42 +157,85 @@ new Chart(ctx, {
 <script>
     function validateForm() {
 
-        const glucose =
-            parseFloat(document.querySelector("[name='Glucose']").value);
+    const pregnancies =
+        parseFloat(document.querySelector("[name='Pregnancies']").value);
 
-        const bmi =
-            parseFloat(document.querySelector("[name='BMI']").value);
+    const glucose =
+        parseFloat(document.querySelector("[name='Glucose']").value);
 
-        const age =
-            parseFloat(document.querySelector("[name='Age']").value);
+    const bloodPressure =
+        parseFloat(document.querySelector("[name='BloodPressure']").value);
 
+    const skinThickness =
+        parseFloat(document.querySelector("[name='SkinThickness']").value);
 
-        if (glucose < 0 || glucose > 300) {
+    const insulin =
+        parseFloat(document.querySelector("[name='Insulin']").value);
 
-            alert("Please enter a valid glucose value between 0 and 300.");
+    const bmi =
+        parseFloat(document.querySelector("[name='BMI']").value);
 
-            return false;
-        }
+    const diabetesPedigree =
+        parseFloat(
+            document.querySelector("[name='DiabetesPedigreeFunction']").value
+        );
 
-
-        if (bmi < 0 || bmi > 100) {
-
-            alert("Please enter a valid BMI value between 0 and 100.");
-
-            return false;
-        }
-
-
-        if (age < 1 || age > 120) {
-
-            alert("Please enter a valid age between 1 and 120.");
-
-            return false;
-        }
+    const age =
+        parseFloat(document.querySelector("[name='Age']").value);
 
 
-        return true;
+    if (pregnancies < 0 || pregnancies > 20) {
+        alert("Please enter a valid number of pregnancies between 0 and 20.");
+        return false;
     }
+
+
+    if (glucose < 0 || glucose > 300) {
+        alert("Please enter a valid glucose value between 0 and 300.");
+        return false;
+    }
+
+
+    if (bloodPressure < 0 || bloodPressure > 200) {
+        alert("Please enter a valid blood pressure value between 0 and 200.");
+        return false;
+    }
+
+
+    if (skinThickness < 0 || skinThickness > 100) {
+        alert("Please enter a valid skin thickness value between 0 and 100.");
+        return false;
+    }
+
+
+    if (insulin < 0 || insulin > 1000) {
+        alert("Please enter a valid insulin value between 0 and 1000.");
+        return false;
+    }
+
+
+    if (bmi < 0 || bmi > 100) {
+        alert("Please enter a valid BMI value between 0 and 100.");
+        return false;
+    }
+
+
+    if (diabetesPedigree < 0 || diabetesPedigree > 3) {
+        alert(
+            "Please enter a valid Diabetes Pedigree Function value between 0 and 3."
+        );
+        return false;
+    }
+
+
+    if (age < 1 || age > 120) {
+        alert("Please enter a valid age between 1 and 120.");
+        return false;
+    }
+
+
+    return true;
+}
 </script>
 
 {% endblock %}
