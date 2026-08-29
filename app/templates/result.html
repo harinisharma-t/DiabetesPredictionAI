@@ -14,6 +14,22 @@
             {{ prediction }}
         </h2>
 
+        {% if "High Risk" in prediction %}
+
+<p class="prediction-summary high-risk-summary">
+    The model has identified a higher estimated risk of diabetes
+    based on the information provided.
+</p>
+
+{% else %}
+
+<p class="prediction-summary low-risk-summary">
+    The model has identified a lower estimated risk of diabetes
+    based on the information provided.
+</p>
+
+{% endif %}
+
         <div class="confidence-box">
 
             <strong>Confidence:</strong> {{ confidence }}%
