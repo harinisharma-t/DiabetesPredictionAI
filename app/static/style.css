@@ -260,3 +260,18 @@ a {
 .about-section li {
     margin-bottom: 8px;
 }
+.prediction-summary {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.high-risk-summary {
+    border: 1px solid #dc3545;
+}
+
+.low-risk-summary {
+    border: 1px solid #198754;
+}
