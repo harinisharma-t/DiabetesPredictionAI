@@ -275,3 +275,8 @@ a {
 .low-risk-summary {
     border: 1px solid #198754;
 }
+.dashboard-intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
