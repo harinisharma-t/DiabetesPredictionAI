@@ -280,3 +280,14 @@ a {
     color: #666;
     margin-bottom: 20px;
 }
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+footer a {
+    text-decoration: none;
+    font-weight: bold;
+}
