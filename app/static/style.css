@@ -291,3 +291,11 @@ footer a {
     text-decoration: none;
     font-weight: bold;
 }
+button[type="reset"] {
+    margin-left: 10px;
+    background-color: #6c757d;
+}
+
+button[type="reset"]:hover {
+    background-color: #5a6268;
+}
