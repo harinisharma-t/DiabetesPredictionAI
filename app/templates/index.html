@@ -154,6 +154,11 @@ new Chart(ctx, {
                 button.disabled = true;
                 button.innerText = "Predicting...";
             }
+            const loadingMessage = document.getElementById("loadingMessage");
+
+if (loadingMessage) {
+    loadingMessage.style.display = "block";
+}
 
         });
     }
